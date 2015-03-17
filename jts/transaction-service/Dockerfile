@@ -2,9 +2,10 @@ FROM fedora
 MAINTAINER Gytis Trikleris <gytis@redhat.com>
 WORKDIR /home
 
-ENV NARAYANA_PORT 3528
+ENV NARAYANA_PORT 4710
 ENV NARAYANA_VERSION 5.0.5.Final-SNAPSHOT
 ENV NARAYANA_HOME /home/narayana
+ENV JACORB_LOG_LEVEL 3
 
 RUN yum install -y java wget unzip \
     && wget https://www.dropbox.com/s/4eiunuuyqinoo4t/narayana-full-5.0.5.Final-SNAPSHOT-bin.zip \
@@ -22,6 +23,6 @@ CMD source $NARAYANA_HOME/jts-jacorb-setup-env.sh; \
         -DObjectStoreEnvironmentBean.objectStoreDir=/home/tx-object-store \
         $NARAYANA_OPTS \
         -DOAPort=$NARAYANA_PORT \
-        -Djacorb.log.default.verbosity=3 \
+        -Djacorb.log.default.verbosity=$JACORB_LOG_LEVEL \
         com.arjuna.ats.jts.TransactionServer -recovery -ORBInitRef.NameService=$NAME_SERVER_URL
 EXPOSE 4710
