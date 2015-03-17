@@ -6,7 +6,7 @@
 
 # Run container
 
-    sudo docker run -it --rm -p 4710:4710 --link name-server:name-server --name transaction-service transaction-service
+    sudo docker run -it --rm -p 3528:3528 --link name-server:name-server --name transaction-service transaction-service
 
 # Optional configuration
 
@@ -17,7 +17,7 @@ doing that: providing jbossts-properties.xml with specific options as explained 
 directory for object store. Object store is located in container's /home/tx-object-store directory, therefore you can use
 -v attribute to mount host's directory as follows:
 
-    sudo docker run -it --rm -p 4710:4710 -v /tmp/tx-object-store:/home/tx-object-store --link name-server:name-server --name transaction-service transaction-service
+    sudo docker run -it --rm -p 3528:3528 -v /tmp/tx-object-store:/home/tx-object-store --link name-server:name-server --name transaction-service transaction-service
 
 ## Providing Narayana configuration
 
