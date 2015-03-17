@@ -31,3 +31,5 @@ NOTE: OrbPortabilityEnvironmentBean.bindMechanism and ObjectStoreEnvironmentBean
 
 Separate configuration options could be passed via NARAYANA_OPTS environment variable, which is later forwarded to
 transaction service. Use docker's -e option for that.
+
+-e "NARAYANA_OPTS=\"-DObjectStoreEnvironmentBean.objectSreDir=/home/object-store\""

@@ -18,7 +18,7 @@ COPY docker-entrypoint.sh /home/docker-entrypoint.sh
 
 ENTRYPOINT ["/home/docker-entrypoint.sh"]
 CMD source $NARAYANA_HOME/jts-jacorb-setup-env.sh; \
-    java -Dcom.arjuna.orbportability.common.OrbPortabilityEnvironmentBean.bindMechanism=NAME_SERVICE \
+    eval java -Dcom.arjuna.orbportability.common.OrbPortabilityEnvironmentBean.bindMechanism=NAME_SERVICE \
         -DObjectStoreEnvironmentBean.objectStoreDir=/home/tx-object-store \
         $NARAYANA_OPTS \
         -DOAPort=$NARAYANA_PORT \
