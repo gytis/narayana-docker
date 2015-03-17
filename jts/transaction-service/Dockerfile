@@ -17,5 +17,11 @@ ENV JAVA_HOME /etc/alternatives/jre
 COPY docker-entrypoint.sh /home/docker-entrypoint.sh
 
 ENTRYPOINT ["/home/docker-entrypoint.sh"]
-CMD source $NARAYANA_HOME/jts-jacorb-setup-env.sh; java com.arjuna.ats.jts.TransactionServer -recovery -ORBInitRef.NameService=$NAME_SERVER_URL $NARAYANA_OPTS
+CMD source $NARAYANA_HOME/jts-jacorb-setup-env.sh; \
+    java -Dcom.arjuna.orbportability.common.OrbPortabilityEnvironmentBean.bindMechanism=NAME_SERVICE \
+        -DObjectStoreEnvironmentBean.objectStoreDir=/home/tx-object-store \
+        $NARAYANA_OPTS \
+        -DOAPort=$NARAYANA_PORT \
+        -Djacorb.log.default.verbosity=3 \
+        com.arjuna.ats.jts.TransactionServer -recovery -ORBInitRef.NameService=$NAME_SERVER_URL
 EXPOSE 4710
