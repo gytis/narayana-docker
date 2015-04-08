@@ -15,5 +15,6 @@
 
     <modules>
         <module>name-server</module>
+        <module>transaction-service</module>
     </modules>
 </project>
