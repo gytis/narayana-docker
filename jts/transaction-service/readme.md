@@ -41,3 +41,13 @@ transaction service. Use docker's -e option for that.
 ## Providing external libraries
 
 For the particular use cases, such as JDBC object store usage, external libraries have to be provided for Narayana. This can be achieved by mounting directory containing required jars to /home/lib directory. All jars from this directory will be added to the class path. NOTE: directory is not scanned recursively.
+
+# Run tests
+
+1. Make sure that docker daemon is started with the following command:
+
+    sudo docker -H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -d
+
+2. Executed tests with maven as usual:
+
+    mvn clean test
