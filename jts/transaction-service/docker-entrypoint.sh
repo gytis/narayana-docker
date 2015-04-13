@@ -11,4 +11,9 @@ echo "Starting Narayana Transaction Service container on ${HOST_IP}:${NARAYANA_P
 echo "NARAYANA_OPTS=$NARAYANA_OPTS"
 echo "NAME_SERVER_URL=$NAME_SERVER_URL"
 
+for i in /home/lib/*.jar
+do
+    export EXT_CLASSPATH="$EXT_CLASSPATH:$i"
+done
+
 exec "$@"

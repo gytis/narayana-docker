@@ -1,12 +1,12 @@
 # Build image
 
     git clone https://github.com/Gytis/narayana-docker.git
-    cd narayana-docker/jts-split/transaction-service
+    cd narayana-docker/jts/transaction-service
     sudo docker build -t transaction-service .
 
 # Run container
 
-    sudo docker run -it --rm -p 3528:3528 --link name-server:name-server --name transaction-service transaction-service
+    sudo docker run -it --rm -p 4710:4710 --link name-server:name-server --name transaction-service transaction-service
 
 # Optional configuration
 
@@ -17,7 +17,7 @@ doing that: providing jbossts-properties.xml with specific options as explained 
 directory for object store. Object store is located in container's /home/tx-object-store directory, therefore you can use
 -v attribute to mount host's directory as follows:
 
-    sudo docker run -it --rm -p 3528:3528 -v /tmp/tx-object-store:/home/tx-object-store --link name-server:name-server --name transaction-service transaction-service
+    sudo docker run -it --rm -p 4710:4710 -v /tmp/tx-object-store:/home/tx-object-store --link name-server:name-server --name transaction-service transaction-service
 
 ## Providing Narayana configuration
 
@@ -33,3 +33,7 @@ Separate configuration options could be passed via NARAYANA_OPTS environment var
 transaction service. Use docker's -e option for that.
 
 -e "NARAYANA_OPTS=\"-DObjectStoreEnvironmentBean.objectSreDir=/home/object-store\""
+
+## Providing external libraries
+
+For the particular use cases, such as JDBC object store usage, external libraries have to be provided for Narayana. This can be achieved by mounting directory containing required jars to /home/lib directory. All jars from this directory will be added to the class path. NOTE: directory is not scanned recursively.

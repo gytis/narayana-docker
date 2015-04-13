@@ -1,7 +1,7 @@
 # Build image
 
     git clone https://github.com/Gytis/narayana-docker.git
-    cd narayana-docker/jts-split/name-server
+    cd narayana-docker/jts/name-server
     sudo docker build -t name-server .
 
 # Run container
