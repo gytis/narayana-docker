@@ -8,6 +8,10 @@
 
     sudo docker run -it --rm -p 4710:4710 --link name-server:name-server --name transaction-service transaction-service
 
+## Prerequisite
+
+Transaction service requires [JacORB name server](../name-server) to be started.
+
 # Optional configuration
 
 ## Exporting object store
