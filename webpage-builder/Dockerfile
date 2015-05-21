@@ -2,11 +2,32 @@ FROM fedora:latest
 
 RUN yum -y update && yum clean all
 RUN yum -y install \
-    libxslt-devel \
-    libxml2-devel \
-    tar \
     nodejs\
+    autoconf \
+    automake \
+    bison \
+    bzip2 \
+    gcc-c++ \
+    git \
+    glibc-devel \
+    glibc-headers \
+    libffi-devel \
+    libtool \
+    libxml2-devel \
+    libxslt-devel \
+    libyaml-devel \
+    make \
+    openssl-devel \
+    patch \
+    patch \
+    readline-devel \
+    sqlite-devel \
+    which \
+    zlib-devel \
 && yum clean all
+
+RUN useradd -m awestruct
+USER awestruct
 
 WORKDIR /home/narayana.io
 
