@@ -1,4 +1,4 @@
 #!/bin/sh
 
 bash --login -c "bundle install"
-bash --login -c "awestruct -g"
+bash --login -c "awestruct -P production"
