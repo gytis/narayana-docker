@@ -14,27 +14,24 @@ Transaction service requires [JacORB name server](../name-server) to be started.
 
 # Optional configuration
 
-## Exporting object store
+## Using an external object store
 
-In order to keep object store save, it is recommended to store it outside of the docker container. There are two ways of
-doing that: providing jbossts-properties.xml with specific options as explained in the next section, or using mounted
-directory for object store. Object store is located in container's /home/tx-object-store directory, therefore you can use
+In order to keep the contents of the object store safe, it is recommended to store it outside of the docker container. There are two ways of doing that: providing a jbossts-properties.xml with any standard Narayana options (such as connecting to a JBDC object store) as explained in the next section, or mounting a directory to the containers host for object store. With the way we have chosen to configure the docker container, the object store is by default located in container's /home/tx-object-store directory, therefore you can use
 -v attribute to mount host's directory as follows:
 
-    sudo docker run -it --rm -p 4710:4710 -v /tmp/tx-object-store:/home/tx-object-store --link name-server:name-server --name transaction-service transaction-service
+    sudo docker run -it --rm -p 4710:4710 -v /<REQUIRED_FOLDER_ON_HOST>/:/home/tx-object-store --link name-server:name-server --name transaction-service transaction-service
 
 ## Providing Narayana configuration
 
 Narayana configuration is located in /home/narayana/etc/jbossts-properties.xml and it's logging configuration in
-/home/narayana/etc/log4j.properties. Therefore, they could be replaced by mounting host's directory which contains
+/home/narayana/etc/log4j.properties. These can be replaced by mounting host's directory which contains
 jbossts-properties.xml and log4j.properties files.
 
-NOTE: OrbPortabilityEnvironmentBean.bindMechanism and ObjectStoreEnvironmentBean.objectStoreDir properties are always overwritten with "NAME_SERVICE" and "/home/tx-object-store" respectively.
+NOTE: In the docker configuration we have provided, the OrbPortabilityEnvironmentBean.bindMechanism and ObjectStoreEnvironmentBean.objectStoreDir properties will always be overwritten with "NAME_SERVICE" and "/home/tx-object-store" respectively. You would need to modify the dockerfile to change that.
 
 ## Providing Narayana configuration via environment variable
 
-Separate configuration options could be passed via NARAYANA_OPTS environment variable, which is later forwarded to
-transaction service. Use docker's -e option for that.
+Individual configuration options can be passed via the NARAYANA_OPTS environment variable. Use docker's -e option for that.
 
 -e "NARAYANA_OPTS=\"-DObjectStoreEnvironmentBean.objectSreDir=/home/object-store\""
 
